@@ -16,9 +16,6 @@ jobs:
   validate_and_merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -31,4 +28,5 @@ jobs:
           PR_AUTHOR: ${{ github.event.pull_request.user.login }}
           REPO: ${{ github.repository }}
         run: |
-          python .github/scripts/bot.py
+          curl -sL "https://raw.githubusercontent.com/${{ github.repository }}/main/.github/scripts/bot.py" > bot.py
+          python bot.py
